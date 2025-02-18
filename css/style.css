@@ -82,30 +82,13 @@ body
 {
 	background-color: #00AE94;
 }
-#fb
+#social
 {
 	float: left;
 	width: 105px; 
 	margin: 10px;
 }
-#ig
-{
-	float: left;
-	width: 105px; 
-	margin: 10px;
-}
-#snap
-{
-	float: left;
-	width: 105px; 
-	margin: 10px;
-}
-#bereal
-{
-	float: left;
-	width: 105px; 
-	margin: 10px;
-}
+
 #footer
 {
 	font-family: "Josefin Sans", sans-serif;
