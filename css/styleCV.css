@@ -1,0 +1,48 @@
+body
+{
+	background-color: #303030;
+	color: #ffffff;
+	font-family: "Lato", sans-serif;
+	font-size: 20px;
+}
+#main
+{
+	width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+}
+#title1
+{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	text-align: center;
+	font-family: "Josefin Sans", sans-serif;
+	font-size: 40px;
+	
+}
+#leftRect
+{
+	width: 114px;
+	height: 1101px;
+	float: left;
+}
+#rightRect
+{
+	width: 114px;
+	height: 1101px;
+	float: left;
+}
+#cv
+{
+	width: 772px;
+	float: left;
+}
+
+#footer
+{
+	font-family: "Josefin Sans", sans-serif;
+	font-size: 20px;
+	text-align: center;
+	margin-top: 10px;
+}
+

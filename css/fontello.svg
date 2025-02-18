@@ -1,0 +1,18 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2024 by original authors @ fontello.com</metadata>
+<defs>
+<font id="fontello" horiz-adv-x="1000" >
+<font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="award" unicode="&#xe800;" d="M256 357q-42 91-42 207h-143v-53q0-44 53-91t132-63z m601 154v53h-143q0-116-41-207 79 16 131 63t53 91z m72 71v-71q0-40-24-80t-62-73-97-54-120-25q-23-30-53-53-21-19-29-40t-8-50q0-30 17-51t54-21q42 0 75-25t32-64v-36q0-8-5-13t-13-5h-464q-8 0-13 5t-5 13v36q0 39 33 64t74 25q38 0 55 21t17 51q0 28-8 50t-29 40q-30 23-53 53-64 3-121 25t-96 54-63 73-23 80v71q0 23 16 38t38 16h160v53q0 37 27 63t63 27h321q37 0 63-27t26-63v-53h161q22 0 38-16t16-38z" horiz-adv-x="928.6" />
+
+<glyph glyph-name="info-outline" unicode="&#xe801;" d="M429 115q50-6 78-51 18-31 12-69t-34-61q-92-79-215-79-160 0-220 122-52 109 13 238l30 58q-51 6-79 51-19 31-12 69t33 61q64 54 154 71-32 53-32 111 0 87 61 148t147 61 147-61 61-148q0-62-35-114t-90-77q40-52 44-123t-34-149z m-64 625q-43 0-74-31t-31-73 31-73 74-30q43 0 73 30t31 73-31 73-73 31z m-95-781q39 0 76 13t54 27l17 12q-33-11-63-11-46 0-56 33t15 82l52 104q44 91 10 150t-123 59q-39 0-76-14t-54-25l-18-13q34 12 64 12 46 0 56-34t-15-81l-52-104q-44-91-10-151t123-59z" horiz-adv-x="573" />
+
+<glyph glyph-name="user" unicode="&#xe802;" d="M714 69q0-60-35-104t-84-44h-476q-49 0-84 44t-35 104q0 48 5 90t17 85 33 73 52 50 76 19q73-72 174-72t175 72q42 0 75-19t52-50 33-73 18-85 4-90z m-143 495q0-88-62-151t-152-63-151 63-63 151 63 152 151 63 152-63 62-152z" horiz-adv-x="714.3" />
+
+<glyph glyph-name="college" unicode="&#xe810;" d="M475 700l-475-250 475-250 275 139s0-126 0-189c0-100 100-100 100-100l0 50s-50 3-50 50c0 75 0 217 0 217l150 83z m-225-450l0-100c0-25 16-58 50-75l175-75 150 75c34 17 77 50 75 75l0 100-225-109z" horiz-adv-x="950" />
+</font>
+</defs>
+</svg>

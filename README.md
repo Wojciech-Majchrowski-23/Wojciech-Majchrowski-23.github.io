@@ -1,2 +1,2 @@
-# Wojciech-Majchrowski-23.github.io
-My home page. It is in a development process. 
+# MyHomePage
+This is a first version of my page. It is still being develped. 
