@@ -11,13 +11,25 @@ body
 	margin-left: auto;
 	margin-right: auto;
 }
-#title1
+#back
 {
+	width: 114px;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	text-align: center;
 	font-family: "Josefin Sans", sans-serif;
 	font-size: 40px;
+	float:left;
+}
+#title1
+{
+	width: 772px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	text-align: center;
+	font-family: "Josefin Sans", sans-serif;
+	font-size: 40px;
+	float:left;
 	
 }
 #leftRect
@@ -44,5 +56,11 @@ body
 	font-size: 20px;
 	text-align: center;
 	margin-top: 10px;
+}
+a.link {
+  color: #ffffff;
+  text-decoration: none;
+  width: 287.5px;
+  height: 177.5px;
 }
 
