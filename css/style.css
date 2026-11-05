@@ -4,84 +4,83 @@ body {
   font-family: "Lato", sans-serif;
   font-size: 25px;
 }
-#main {
+
+.page {
   width: 1250px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.rectangle {
-  width: 1200px;
-  margin: 25px;
-}
-.square {
-  width: 50%;
-  float: left;
-}
-#title1 {
-  margin: 12.5px;
-  text-align: center;
-  float: left;
-  font-family: "Josefin Sans", sans-serif;
-  font-size: 50px;
-}
-#subtitle {
-  float: left;
-  margin: 12.5px;
-}
-#tile1 {
-  float: left;
-  width: 287.5px;
-  height: 177.5px;
-  margin: 12.5px;
-  background-color: #00bfa5;
-}
-#tile1:hover {
-  background-color: #00ae94;
-}
-#tile2 {
-  float: left;
-  width: 287.5px;
-  height: 177.5px;
-  margin: 12.5px;
-  background-color: #1de9b6;
-}
-#tile2:hover {
-  background-color: #0cd8a5;
-}
-#tile3 {
-  float: left;
-  width: 287.5px;
-  height: 177.5px;
-  margin: 12.5px;
-  background-color: #1de9b6;
-}
-#tile3:hover {
-  background-color: #0cd8a5;
-}
-#tile4 {
-  float: left;
-  width: 287.5px;
-  height: 177.5px;
-  margin: 12.5px;
-  background-color: #00bfa5;
-}
-#tile4:hover {
-  background-color: #00ae94;
-}
-.social {
-  float: left;
-  width: 131.25px;
-  margin: 12.5px;
+  margin: 0 auto;
 }
 
-#footer {
+.site-header {
+  margin: 25px;
+  padding: 12.5px;
+}
+
+.site-title {
+  margin: 0;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 50px;
+  font-weight: 400;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.profile-photo {
+  display: block;
+  width: 575px;
+  height: 475px;
+  margin: 12.5px;
+  object-fit: cover;
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 12.5px;
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(2, 287.5px);
+  gap: 25px;
+}
+
+.tile {
+  height: 177.5px;
+}
+
+.tile--teal {
+  background-color: #00bfa5;
+}
+
+.tile--teal:hover {
+  background-color: #00ae94;
+}
+
+.tile--mint {
+  background-color: #1de9b6;
+}
+
+.tile--mint:hover {
+  background-color: #0cd8a5;
+}
+
+.socials {
+  display: grid;
+  grid-template-columns: repeat(4, 131.25px);
+  gap: 25px;
+}
+
+.socials img {
+  display: block;
+  width: 105px;
+}
+
+.site-footer {
   font-family: "Josefin Sans", sans-serif;
   font-size: 25px;
   text-align: center;
-}
-a.link {
-  color: #ffffff;
-  text-decoration: none;
-  width: 287.5px;
-  height: 177.5px;
 }
