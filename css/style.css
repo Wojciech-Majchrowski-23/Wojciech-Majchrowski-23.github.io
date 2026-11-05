@@ -1,86 +1,339 @@
+/* :root to element <html>, więc te zmienne działają w całym pliku */
+:root {
+  --ink: #222831;
+  --stone: #948979;
+  --sand: #dfd0b8;
+  --gap: 1.5rem; /* 1rem = 16px przy domyślnych ustawieniach, czyli tu 24px */
+  --gutter: clamp(1rem, 6vw, 5rem); /* margines boczny: 6% szerokości okna, ale od 1rem do 5rem */
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body {
-  background-color: #303030;
-  color: #ffffff;
-  font-family: "Lato", sans-serif;
-  font-size: 25px;
+  display: flex; /* układa dzieci w jednej linii... */
+  flex-direction: column; /* ...a tu w kolumnie: header, main, footer */
+  min-height: 100vh; /* co najmniej 100% wysokości okna, żeby stopka była na dole */
+  background: var(--sand);
+  color: var(--ink);
+  font-family: "DM Sans", sans-serif;
 }
 
-.page {
-  width: 1250px;
-  margin: 0 auto;
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
+svg {
+  display: block;
+  fill: currentColor; /* ikona przyjmuje kolor tekstu, więc zmienia się razem z nim */
+}
+
+.icon-sprite {
+  display: none; /* ukryty zestaw ikon, wstawianych w HTML przez <use> */
+}
+
+.wrap {
+  width: min(70rem, 100% - 2 * var(--gutter)); /* mniejsza z wartości: max 70rem albo całe okno minus marginesy */
+  margin-inline: auto; /* równe marginesy z lewej i prawej, czyli wyśrodkowanie */
+}
+
+/* Header reaguje tylko na imię i nazwisko, a potem trzyma stan, dopóki kursor jest w headerze */
 .site-header {
-  margin: 25px;
-  padding: 12.5px;
+  margin-bottom: 2rem;
+  padding: 1.25rem 0;
+  pointer-events: none; /* krok 1: header ignoruje mysz */
+  transition: background-color 0.2s ease, color 0.2s ease; /* płynna zmiana kolorów przez 0,2 s */
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: baseline; /* wyrównuje nazwisko i menu do linii pisma */
 }
 
 .site-title {
-  margin: 0;
-  font-family: "Josefin Sans", sans-serif;
-  font-size: 50px;
-  font-weight: 400;
+  font-family: "Source Serif 4", serif;
+  font-size: clamp(1.5rem, 8vw, 2rem); /* clamp(minimum, preferowane, maksimum) */
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.site-title a {
+  pointer-events: auto; /* krok 2: wyjątek, nazwisko reaguje na mysz */
+}
+
+.site-nav {
+  display: flex;
+  gap: 2rem; /* odstęp między linkami */
+  margin-left: 3rem;
+  font-size: 1rem;
+  font-weight: 500;
+  opacity: 0; /* niewidoczne... */
+  visibility: hidden; /* ...i nieklikalne */
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.site-nav a:hover {
+  color: var(--stone);
+}
+
+.site-header:hover, /* krok 3: najechanie na nazwisko to też :hover całego headera */
+.site-header:focus-within { /* to samo przy przejściu klawiszem Tab */
+  background: var(--ink);
+  color: var(--sand);
+  pointer-events: auto; /* krok 4: cały header reaguje, aż kursor z niego wyjedzie */
+}
+
+.site-header:hover .site-nav,
+.site-header:focus-within .site-nav {
+  opacity: 1;
+  visibility: visible;
 }
 
 .columns {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  flex: 1; /* zabiera wolne miejsce w body, więc stopka zostaje na dole */
+  display: grid; /* układ ustawia rodzic, dzieci same trafiają do komórek */
+  grid-template-columns: 1fr 1fr; /* dwie równe kolumny, fr to część wolnego miejsca */
+  gap: var(--gap); /* odstęp między komórkami */
+  min-height: clamp(26rem, 74vh, 37rem); /* 74% wysokości okna, od 26rem do 37rem */
+  margin-bottom: 2.5rem;
 }
 
-.profile-photo {
-  display: block;
-  width: 575px;
-  height: 475px;
-  margin: 12.5px;
-  object-fit: cover;
+.photo {
+  position: relative; /* punkt odniesienia dla zdjęcia z position: absolute */
+  overflow: hidden; /* przycina wszystko, co wystaje poza panel */
+  background: var(--stone);
+}
+
+.photo__image {
+  position: absolute; /* wyjęte z układu, więc rozmiar zdjęcia nie rozpycha panelu */
+  inset: 0; /* skrót od top, right, bottom i left równych 0 */
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* powiększa proporcjonalnie i przycina nadmiar, bez rozciągania */
+  object-position: 50% 79%; /* która część zdjęcia zostaje widoczna: poziom i pion */
 }
 
 .side {
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  padding: 12.5px;
+  gap: var(--gap);
 }
 
 .tiles {
+  flex: 1; /* kafelki wypełniają miejsce nad ikonami sociali */
   display: grid;
-  grid-template-columns: repeat(2, 287.5px);
-  gap: 25px;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 1fr; /* wszystkie wiersze tej samej wysokości */
+  gap: var(--gap);
 }
 
 .tile {
-  height: 177.5px;
+  position: relative; /* punkt odniesienia dla ikony kafelka */
+  display: flex;
+  align-items: flex-end; /* napis i strzałka na dole kafelka */
+  justify-content: space-between; /* napis z lewej, strzałka z prawej */
+  padding: 1.5rem;
+  background: var(--stone);
+  font-size: clamp(1.125rem, 1.75vw, 1.375rem);
+  font-weight: 600;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
 }
 
-.tile--teal {
-  background-color: #00bfa5;
+.tile__icon {
+  position: absolute; /* przypięta do lewego górnego rogu kafelka */
+  top: 1.5rem;
+  left: 1.5rem;
+  width: 3rem;
+  height: 3rem;
 }
 
-.tile--teal:hover {
-  background-color: #00ae94;
-}
-
-.tile--mint {
-  background-color: #1de9b6;
-}
-
-.tile--mint:hover {
-  background-color: #0cd8a5;
+.tile__arrow {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .socials {
-  display: grid;
-  grid-template-columns: repeat(4, 131.25px);
-  gap: 25px;
+  display: flex;
+  gap: 0.75rem;
 }
 
-.socials img {
-  display: block;
-  width: 105px;
+.socials a {
+  display: grid;
+  place-items: center; /* ikona na środku kwadratu */
+  width: 3rem;
+  height: 3rem;
+  border: 0.1rem solid var(--ink);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.socials svg {
+  width: 1.375rem;
+  height: 1.375rem;
+}
+
+/* Tylko urządzenia z kursorem: na dotyku efekt zostawałby po stuknięciu */
+@media (hover: hover) {
+  .tile:hover {
+    background: var(--ink);
+    color: var(--sand);
+    transform: scale(1.05); /* powiększenie o 5% bez wpływu na układ sąsiadów */
+  }
+
+  .socials a:hover {
+    background: var(--ink);
+    color: var(--sand);
+  }
 }
 
 .site-footer {
-  font-family: "Josefin Sans", sans-serif;
-  font-size: 25px;
+  padding: 1rem 0;
+  background: var(--ink);
+  color: var(--sand);
+  font-size: 0.875rem;
   text-align: center;
+}
+
+/* Podstrony: Kontakt i work in progress */
+.subpage {
+  flex: 1; /* zabiera wolne miejsce, więc stopka zostaje na dole */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* środek w poziomie */
+  justify-content: center; /* środek w pionie */
+  gap: 2rem;
+  padding: 2.5rem var(--gutter);
+  text-align: center;
+}
+
+.subpage__title {
+  font-family: "Source Serif 4", serif;
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* wiersze równo od lewej, cały blok i tak jest na środku */
+  gap: 1rem;
+  max-width: 100%;
+  font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+  font-style: normal; /* <address> domyślnie ma kursywę */
+  text-align: left;
+}
+
+.contact__row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.contact__row span {
+  overflow-wrap: anywhere; /* długi e-mail może się złamać na wąskim ekranie */
+}
+
+.contact__row svg {
+  flex-shrink: 0; /* ikona nie zwęża się, gdy brakuje miejsca */
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border: 0.1rem solid var(--ink);
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.back-link svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+@media (hover: hover) {
+  a.contact__row:hover {
+    text-decoration: underline;
+  }
+
+  .back-link:hover {
+    background: var(--ink);
+    color: var(--sand);
+  }
+}
+
+/* Bloki @media są na końcu, bo przy równej szczegółowości wygrywa późniejsza reguła */
+
+/* Okno do 1000px: wszystko jeden pod drugim, zaczynając od zdjęcia */
+@media (max-width: 62.5rem) {
+  .columns {
+    grid-template-columns: 1fr; /* jedna kolumna wystarcza, żeby elementy ułożyły się pod sobą */
+    min-height: 0;
+  }
+
+  .photo {
+    width: 100%; /* bez tego max-height zwęziłby panel, żeby zachować proporcje */
+    aspect-ratio: 4 / 3; /* wysokość wynika z szerokości */
+    max-height: 60vh; /* ale zdjęcie nie zajmie więcej niż 60% wysokości okna */
+  }
+
+  .photo__image {
+    object-position: 50% 63%; /* niższy panel, więc kadr wyżej, żeby zmieścić głowę */
+  }
+
+  .tiles {
+    grid-template-columns: 1fr;
+  }
+
+  .tile {
+    min-height: 8.75rem;
+    font-size: 1.375rem;
+  }
+}
+
+/* Telefon albo ekran dotykowy: nie da się najechać na nazwisko, więc menu jest rozwinięte */
+@media (max-width: 37.5rem), (hover: none) {
+  .site-header {
+    background: var(--ink);
+    color: var(--sand);
+    pointer-events: auto;
+  }
+
+  .site-nav {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* Telefon, okno do 600px */
+@media (max-width: 37.5rem) {
+  .site-header__inner {
+    flex-direction: column; /* menu pod nazwiskiem */
+    gap: 0.5rem;
+  }
+
+  .site-nav {
+    flex-wrap: wrap; /* linki przejdą do nowej linii, gdy zabraknie miejsca */
+    gap: 0.5rem 1.5rem;
+    margin-left: 0;
+  }
+
+  .photo {
+    aspect-ratio: 4 / 5;
+  }
+
+  .photo__image {
+    object-position: 50% 70%;
+  }
+
+  .socials {
+    justify-content: center; /* ikony na środku w poziomie */
+  }
 }
