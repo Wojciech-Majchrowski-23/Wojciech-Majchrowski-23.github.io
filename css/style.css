@@ -40,17 +40,17 @@ svg {
   margin-inline: auto; /* równe marginesy z lewej i prawej, czyli wyśrodkowanie */
 }
 
-/* Header reaguje tylko na imię i nazwisko, a potem trzyma stan, dopóki kursor jest w headerze */
+/* Header zawsze widoczny: ciemne tło jak w stopce, jasne napisy */
 .site-header {
   margin-bottom: 2rem;
   padding: 1.25rem 0;
-  pointer-events: none; /* krok 1: header ignoruje mysz */
-  transition: background-color 0.2s ease, color 0.2s ease; /* płynna zmiana kolorów przez 0,2 s */
+  background: var(--ink);
+  color: var(--sand);
 }
 
 .site-header__inner {
   display: flex;
-  align-items: baseline; /* wyrównuje nazwisko i menu do linii pisma */
+  align-items: center; /* nazwisko, menu i przycisk języka w jednej osi */
 }
 
 .site-title {
@@ -60,36 +60,38 @@ svg {
   letter-spacing: -0.01em;
 }
 
-.site-title a {
-  pointer-events: auto; /* krok 2: wyjątek, nazwisko reaguje na mysz */
-}
-
 .site-nav {
   display: flex;
   gap: 2rem; /* odstęp między linkami */
   margin-left: 3rem;
   font-size: 1rem;
   font-weight: 500;
-  opacity: 0; /* niewidoczne... */
-  visibility: hidden; /* ...i nieklikalne */
-  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.site-nav a {
+  white-space: nowrap; /* "Dla pracodawcy" nigdy nie łamie się w środku */
 }
 
 .site-nav a:hover {
   color: var(--stone);
 }
 
-.site-header:hover, /* krok 3: najechanie na nazwisko to też :hover całego headera */
-.site-header:focus-within { /* to samo przy przejściu klawiszem Tab */
-  background: var(--ink);
-  color: var(--sand);
-  pointer-events: auto; /* krok 4: cały header reaguje, aż kursor z niego wyjedzie */
+/* Przełącznik PL / EN w prawym górnym rogu */
+.lang-switch {
+  margin-left: auto; /* w flexie zabiera całe wolne miejsce z lewej, więc ląduje po prawej */
+  padding: 0.375rem 0.75rem;
+  border: 0.1rem solid currentColor; /* ramka w kolorze tekstu, czyli jasna */
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
-.site-header:hover .site-nav,
-.site-header:focus-within .site-nav {
-  opacity: 1;
-  visibility: visible;
+@media (hover: hover) {
+  .lang-switch:hover {
+    background: var(--sand);
+    color: var(--ink);
+  }
 }
 
 .columns {
@@ -298,25 +300,24 @@ svg {
   }
 }
 
-/* Telefon albo ekran dotykowy: nie da się najechać na nazwisko, więc menu jest rozwinięte */
-@media (max-width: 37.5rem), (hover: none) {
-  .site-header {
-    background: var(--ink);
-    color: var(--sand);
-    pointer-events: auto;
-  }
-
-  .site-nav {
-    opacity: 1;
-    visibility: visible;
-  }
-}
-
-/* Telefon, okno do 600px */
-@media (max-width: 37.5rem) {
+/* Okno do 900px: nazwisko, menu i przycisk języka nie mieszczą się w jednej linii
+   (razem ok. 740px treści + marginesy boczne), więc menu schodzi pod nazwisko */
+@media (max-width: 56.25rem) {
   .site-header__inner {
+    position: relative; /* punkt odniesienia dla przycisku języka */
     flex-direction: column; /* menu pod nazwiskiem */
+    align-items: flex-start;
     gap: 0.5rem;
+  }
+
+  .site-title {
+    padding-right: 3.5rem; /* miejsce na przycisk języka */
+  }
+
+  .lang-switch {
+    position: absolute; /* wyjęty z kolumny, przypięty do prawego górnego rogu */
+    top: 0;
+    right: 0;
   }
 
   .site-nav {
@@ -324,7 +325,10 @@ svg {
     gap: 0.5rem 1.5rem;
     margin-left: 0;
   }
+}
 
+/* Telefon, okno do 600px */
+@media (max-width: 37.5rem) {
   .photo {
     aspect-ratio: 4 / 5;
   }
